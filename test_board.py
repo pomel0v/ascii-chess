@@ -1,5 +1,6 @@
 from chess.colors import Color
 from chess.knight import Knight
+from chess.bishop import Bishop
 from chess.rook import Rook
 from chess.board import Board
 import pytest
@@ -8,10 +9,14 @@ import pytest
 def test_initial_board_size():
     """ поле правильного размера 8х8 """
     board = Board()
-
+    assert len(board.field) == board.FIELD_SIZE
+    for column in board.field:
+        assert len(column) == board.FIELD_SIZE
+    
 
 def test_white_first():
-    pass
+    board = Board()
+    assert board.current_color == Color.WHITE
 
 
 def test_initial_setup():
@@ -21,6 +26,14 @@ def test_initial_setup():
     fig = board.field[0][0]
     assert fig.color == Color.WHITE
     assert isinstance(fig, Rook)
+
+    fig = board.field[0][1]
+    assert fig.color == Color.WHITE
+    assert isinstance(fig, Knight)
+
+    fig = board.field[0][2]
+    assert fig.color == Color.WHITE
+    assert isinstance(fig, Bishop)
 
 
 def test_cant_move_wrong_command():
