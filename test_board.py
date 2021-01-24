@@ -49,3 +49,8 @@ def test_cant_move_same_place():
 def test_cant_move_no_figure():
     board = Board()
     assert not board.can_move(5, 5, 5, 5)
+
+
+def test_cant_move_wrong_knight():
+    board = Board()
+    assert not board.can_move(0, 1, 2, 1)

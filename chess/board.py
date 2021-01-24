@@ -112,17 +112,17 @@ class Board:
         if figure_from is None:
             return False
 
+        # нельзя сходить в свою уже занятую клетку
+        if figure_to:
+            if figure_from.color == figure_to.color:
+                return False
+
         # нельзя ходить чужими фигурами
         if figure_from.color != self.current_color:
             return False
 
         # проверка, что теоретически фигура может туда попасть
-        if figure_from.can_move(row_new, col_new):
-            return True
-        
-        # нельзя сходить в свою уже занятую клетку
-        if figure_from.color == figure_to.color:
-            return False
+        return figure_from.can_move(row_new, col_new)
         
     def change_color(self):
         if self.current_color == Color.WHITE:
